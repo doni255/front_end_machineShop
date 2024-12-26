@@ -4,7 +4,6 @@ import axios from "axios";
 import { FaFileExcel, FaFilePdf } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
-import "jspdf-autotable"; // Import for auto table
 import Pagination from "../consts/Pagination";
 
 export default function Pendapatan() {

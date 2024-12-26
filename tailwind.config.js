@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 import { nextui } from "@nextui-org/react";
+import forms from "@tailwindcss/forms";
 
 export default {
   content: [
@@ -32,5 +33,5 @@ export default {
   },
   darkMode: "class",
   // plugins: [nextui()],
-  plugins: [import("@tailwindcss/forms")],
+  plugins: [forms, nextui()],
 };
