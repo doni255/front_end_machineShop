@@ -45,7 +45,7 @@ export default function BarangMasukAdmin() {
 
     try {
       const response = axios.post(
-        `http://localhost:8000/api/barang_masuk/konfirmasi_barang_masuk`,
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/konfirmasi_barang_masuk`,
         formData,
         {
           headers: {

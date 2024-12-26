@@ -8,7 +8,7 @@ const FeatureWaterPump_Sparepart = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8000/api/product/categories", {
+      .post("https://backendtokomesin.grhapengharapan.org/api/product/categories", {
         categories: ["Pompa Air", ""],
       })
       .then((response) => {

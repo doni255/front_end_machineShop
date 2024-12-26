@@ -8,7 +8,7 @@ const FeatureSectionSaw_SparePart = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:8000/api/product/categories", {
+      .post("https://backendtokomesin.grhapengharapan.org/api/product/categories", {
         categories: ["Gergaji", "Spare Part Gergaji"],
       })
       .then((response) => {

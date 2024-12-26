@@ -69,7 +69,7 @@ export default function BarangMasuk() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/barang_masuk/update/${selectedProduct.id_barang_masuk}`,
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/update/${selectedProduct.id_barang_masuk}`,
         formData,
         {
           headers: {

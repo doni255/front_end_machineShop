@@ -70,7 +70,7 @@ export const useRegister = () => {
 
     // Submit logic
     try {
-      const response = await fetch("http://localhost:8000/api/store_user", {
+      const response = await fetch("https://backendtokomesin.grhapengharapan.org/store_user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

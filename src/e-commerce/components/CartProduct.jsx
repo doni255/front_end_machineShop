@@ -23,7 +23,7 @@ const CartProduct = () => {
   const fetchCartProduct = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/keranjang_pembelian/` +
+        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/` +
           localStorage.getItem("id_user")
       );
 
@@ -41,7 +41,7 @@ const CartProduct = () => {
   const deleteCartProduct = async (id_beli_produk) => {
     try {
       await axios.delete(
-        `http://localhost:8000/api/hapus_keranjang/${id_beli_produk}`
+        `https://backendtokomesin.grhapengharapan.org/api/hapus_keranjang/${id_beli_produk}`
       );
       toast.success("Produk berhasil dihapus dari keranjang.");
       fetchCartProduct();
@@ -57,7 +57,7 @@ const CartProduct = () => {
 
     try {
       await axios.post(
-        `http://localhost:8000/api/keranjang_pembelian/beli_product/${id_beli_produk}`,
+        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/beli_product/${id_beli_produk}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -83,7 +83,7 @@ const CartProduct = () => {
       formData.append("bukti_pembayaran", selectedFile);
 
       const response = await axios.post(
-        "http://localhost:8000/api/keranjang_pembelian/beli_all_products",
+        "https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/beli_all_products",
         formData,
         {
           headers: {

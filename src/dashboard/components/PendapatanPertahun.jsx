@@ -19,10 +19,10 @@ function PendapatanPertahun() {
     const fetchData = async () => {
       try {
         const incomeResponse = await axios.get(
-          "http://localhost:8000/api/grafik_pendapatan_pertahun"
+          "https://backendtokomesin.grhapengharapan.org/api/grafik_pendapatan_pertahun"
         );
         const expenseResponse = await axios.get(
-          "http://localhost:8000/api/grafik_pengeluaran_pertahun"
+          "https://backendtokomesin.grhapengharapan.org/api/grafik_pengeluaran_pertahun"
         );
 
         const combinedData = incomeResponse.data.map((income) => {

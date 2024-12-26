@@ -16,7 +16,7 @@ const History = () => {
       if (!id_user) return; // Ensure id_user is not null
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/histori_beli_produk/${id_user}`,
+          `https://backendtokomesin.grhapengharapan.org/api/histori_beli_produk/${id_user}`,
           {
             headers: {
               "Content-Type": "application/json",

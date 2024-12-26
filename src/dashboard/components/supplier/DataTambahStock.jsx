@@ -64,7 +64,7 @@ export default function DataTambahStock() {
     console.log(localStorage.getItem("id_user"));
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/tambah_stock/data_stock_supplier/" + 
+        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/data_stock_supplier/" + 
         localStorage.getItem("id_user"),
       );
     console.log(response.data.data);
@@ -95,7 +95,7 @@ export default function DataTambahStock() {
           `handleDelete called with id_tambah_stock: ${selectedBarangMasuk.id_tambah_stock}`
         );
         await axios.delete(
-          `http://localhost:8000/api/tambah_stock/destroy/${selectedBarangMasuk.id_tambah_stock}`
+          `https://backendtokomesin.grhapengharapan.org/api/tambah_stock/destroy/${selectedBarangMasuk.id_tambah_stock}`
         );
         toast.success("Product berhasil di batal !", {
           duration: 5000,

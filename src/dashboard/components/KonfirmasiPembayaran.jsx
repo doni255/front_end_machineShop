@@ -65,7 +65,7 @@ export default function KonfirmasiPembayaran() {
 
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/status_beli_product"
+        "https://backendtokomesin.grhapengharapan.org/api/status_beli_product"
       );
       const data = response.data.data || [];
       console.log("data", data);
@@ -89,7 +89,7 @@ export default function KonfirmasiPembayaran() {
 
     axios
       .post(
-        `http://localhost:8000/api/konfirmasi_pembayaran/${selectedKonfirmasiPembayaran}`,
+        `https://backendtokomesin.grhapengharapan.org/api/konfirmasi_pembayaran/${selectedKonfirmasiPembayaran}`,
 
         {
           headers: {
@@ -129,7 +129,7 @@ export default function KonfirmasiPembayaran() {
     console.log(idBeliProduk); // Log the ID to confirm it’s available
 
     axios
-      .delete(`http://localhost:8000/api/hapus_keranjang/${idBeliProduk}`, {
+      .delete(`https://backendtokomesin.grhapengharapan.org/api/hapus_keranjang/${idBeliProduk}`, {
         headers: {
           Accept: "application/json",
           "Content-Type": "multipart/form-data",

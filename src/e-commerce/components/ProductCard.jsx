@@ -31,7 +31,7 @@ const ProductCard = ({ product }) => {
 
     axios
       .post(
-        `http://localhost:8000/api/keranjang_pembelian/tambah_keranjang/${idUser}`,
+        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/tambah_keranjang/${idUser}`,
         {
           id_user: idUser,
           id_product: idProduct,
