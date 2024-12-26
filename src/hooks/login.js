@@ -76,7 +76,7 @@ const login = () => {
         } else if (response.data.data.role === "supplier") {
           navigate("/dashboard/products");
         }
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       // Check if error is due to wrong password or other is issues
