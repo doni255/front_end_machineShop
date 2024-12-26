@@ -8,16 +8,10 @@ import { useRegister } from "../../hooks/useRegister";
 import {
   AiOutlineUser,
   AiOutlineShoppingCart,
-  AiOutlineLogin,
   AiOutlineProduct,
   AiOutlineTruck,
 } from "react-icons/ai";
 import { useState, useEffect } from "react";
-import CartCountBadge from "./CartCountBadge";
-import FeatureSectionSaw_SparePart from "./FeatureSectionSaw_SparePart";
-import FeatureSpeedBoat_SparePart from "./FeatureSpeedBoat_SparePart";
-import FeatureSectionGenerators_SparePart from "./FeatureSectionGenerators_SparePart";
-import FeatureWaterPump_Sparepart from "./FeatureWaterPump_SparePart";
 import {
   Transition,
   Popover,
@@ -26,9 +20,6 @@ import {
 } from "@headlessui/react";
 import { TbReportSearch } from "react-icons/tb";
 import toast, { Toaster } from "react-hot-toast";
-import { TruckIcon } from "@heroicons/react/20/solid";
-import { FaTruckLoading } from "react-icons/fa";
-import { LuTruck } from "react-icons/lu";
 
 interface NavbarProps {
   setShowCart: (show: boolean) => void;
@@ -65,13 +56,13 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
     handleLogin,
   } = login();
 
+  const { isRegisterModalOpen, setIsRegisterModalOpen } = useRegister();
+
   const { formData, handleChange, handleSubmit } = useRegister();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]); // Adjust type according to your product data structure
   const [isProfileModalOpen, setisProfileModalOpen] = useState<boolean>(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] =
-    useState<boolean>(false);
   const navigate = useNavigate();
 
   // Get user role from localStorage or context
@@ -92,7 +83,7 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
     await handleLogin(e); // Perform login
     const role = localStorage.getItem("role");
     if (role === "user") {
-      navigate("/e-commerce"); // Redirect to e-commerce page after login
+      navigate("/e-commerce/profile"); // Redirect to e-commerce page after login
       setIsLoginModalOpen(false);
     }
 
@@ -182,14 +173,6 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
                 </>
               )}
 
-              {/* <div
-                  className="icon__wrapper cursor-pointer relative text-[#F5C300] hover:text-[#FF6B00]"
-                  onClick={() => setShowCart(true)}
-                >
-                  <AiOutlineShoppingCart size={24} />
-                  <CartCountBadge size="w-[25px] h-[25px]" />
-                </div> */}
-
               {/* Login Button */}
               <button
                 type="submit"
@@ -227,28 +210,6 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
 
             <br />
             <br />
-
-            {/* {userData ? (
-              <>
-                <p>
-                  <strong>Name:</strong> {userData.nama || "No Name"}
-                </p>
-                <p>
-                  <strong>Email:</strong> {userData.email || "No Email"}
-                </p>
-                <p>
-                  <strong>Phone:</strong> {userData.no_telpon || "No Phone"}
-                </p>
-                <p>
-                  <strong>City:</strong> {userData.kota || "No City"}
-                </p>
-                <p>
-                  <strong>Address:</strong> {userData.alamat || "No Address"}
-                </p>
-              </>
-            ) : (
-              <p>Tidak ada data user</p>
-            )} */}
 
             <button
               className="mt-4 px-4 py-2 bg-[#F5C300] hover:bg-[#FF6B00] text-white rounded-lg"
@@ -373,12 +334,6 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
               onSubmit={handleSubmit}
               className="grid grid-cols-6 gap-6 max-w-md mx-auto"
             >
-              {/* <div className="col-span-6 flex justify-center">
-                <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                  Create Account 😁
-                </h1>
-              </div> */}
-
               <div className="col-span-6">
                 <label
                   htmlFor="FirstName"

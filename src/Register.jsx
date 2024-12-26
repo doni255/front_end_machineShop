@@ -3,8 +3,6 @@ import "./index.css";
 import "./Login.css";
 
 import { useNavigate } from "react-router-dom";
-import axiosClient from "./axiosClient";
-import { useStateContext } from "./contexts/contextprovider";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function Register() {
@@ -31,8 +29,6 @@ export default function Register() {
     alamat: "",
     password: "",
   });
-
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -77,19 +73,25 @@ export default function Register() {
       return;
     }
     try {
-      const response = await fetch("https://backendtokomesin.grhapengharapan.org/api/store_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://backendtokomesin.grhapengharapan.org/api/store_user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       // Redirect if it success
       const result = await response.json();
       console.log("Result:", result);
+      setIsRegisterModalOpen(false);
       // Redirect to login page with success state
-      navigate("/", { state: { registrationSuccess: true } });
+      navigate("/e-commerce/products", {
+        state: { registrationSuccess: true },
+      });
     } catch (error) {
       setError("An unexpected error occurred.");
     }
@@ -168,26 +170,6 @@ export default function Register() {
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
-
-              {/* <div className="col-span-6 sm:col-span-6">
-                <label
-                  htmlFor="Password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Role
-                </label>
-
-                <input
-                  ref={roleRef}
-                  type="text"
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                  required
-                />
-              </div> */}
 
               <div className="col-span-6">
                 <label
@@ -284,98 +266,5 @@ export default function Register() {
         </main>
       </div>
     </section>
-
-    // <div className="bg-gradient-to-l bg-gray-100">
-    //   <div className="flex justify-center items-center min-h-screen">
-    //     <div className="w-full sm:w-3/4 md:w-2/4 lg:w-1/3 xl:w-1/4 p-6 shadow-2xl bg-white rounded-md">
-    //       <h1 className="text-3xl block text-center font-semibold">
-    //         <i className="fa-solid fa-user-plus"></i> Register
-    //       </h1>
-    //       <hr className="mt-3" />
-
-    //       {/* Add your registration form fields here */}
-
-    //       <div className="mt-3 flex justify-between items-center">
-    //         <div>
-    //           <p>Already have an account? </p>
-    //         </div>
-    //         <div>
-    //           <button
-    //             className="text-gray-400 font-semibold hover:text-indigo-600"
-    //             onClick={handleLoginClick}
-    //           >
-    //             Login Here
-    //           </button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <div class="flex justify-center items-center min-h-screen bg-gray-100">
-    //   <div class="w-full sm:w-3/4 md:w-2/4 lg:w-1/3 xl:w-1/4 p-6 shadow-2xl bg-white rounded-md text-center">
-    //     <h1 class="text-3xl font-semibold mb-6">SIGN UP</h1>
-    //     <hr class="mt-3" />
-
-    //     <form action="">
-    //       <div class="mt-6 shadow-xl rounded-md">
-    //         <input
-    //           type="text"
-    //           id="username"
-    //           class="rounded-md  w-full text-base px-2 py-1 Focus:outline-none focus:ring-0 focus:border-gray-600"
-    //           placeholder=" Username"
-    //         />
-    //       </div>
-
-    //       <div class="mt-6 shadow-xl rounded-md">
-    //         <input
-    //           type="password"
-    //           id="password"
-    //           class="rounded-md  w-full text-base px-2 py-1 Focus:outline-none Focus:ring-0 focus:border-gray-600 "
-    //           placeholder=" Email"
-    //         />
-    //       </div>
-
-    //       <div class="mt-6 shadow-xl rounded-md">
-    //         <input
-    //           type="password"
-    //           id="password"
-    //           class="rounded-md w-full text-base px-2 py-1 Focus:outline-none Focus:ring-0 focus:border-gray-600 "
-    //           placeholder=" Password"
-    //         />
-    //       </div>
-
-    //       <div class="mt-6 shadow-xl rounded-md">
-    //         <input
-    //           type="password"
-    //           id="password"
-    //           class="rounded-md w-full text-base px-2 py-1 Focus:outline-none Focus:ring-0 focus:border-gray-600 "
-    //           placeholder=" Confirm Password"
-    //         />
-    //       </div>
-
-    //       <div class="mt-8">
-    //         <button
-    //           type="submit"
-    //           class="border-2 border-sky-500 bg-sky-500 text-white py-1 px-5 w-full rounded-md hover:bg-sky-600"
-    //         >
-    //           Login
-    //         </button>
-    //       </div>
-
-    //       <div class="mt-4">
-    //         <h1 class="">
-    //           Already have an account
-    //           <button
-    //             className="ml-1 text-gray-400 font-semibold hover:text-indigo-600"
-    //             onClick={() => navigate("/login")}
-    //           >
-    //             Login
-    //           </button>
-    //         </h1>
-    //       </div>
-    //     </form>
-    //   </div>
-    // </div>
   );
 }

@@ -172,15 +172,29 @@ function App() {
             <Route
               path="/e-commerce"
               element={
-                <ProtectedRoute roles={['admin', 'user']}>
+                <ProtectedRoute role="admin">
                   <LayoutEcommerce />
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Navigate to="profile" />} />
+              <Route
+                path="products"
+                element={<Navbar setShowCart={setShowCart} />}
+              >
+                <Route
+                  index
+                  element={
+                    <>
+                      <MobNavBar setShowCart={setShowCart} />
+
+                      {showCart && <Cart setShowCart={setShowCart} />}
+                    </>
+                  }
+                />
+              </Route>
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="products" element={<Navbar setShowCart={setShowCart} />} />
               <Route path="cartproduct" element={<CartProduct />} />
+
               <Route path="history" element={<History />} />
               <Route path="track_order" element={<TrackOrder />} />
             </Route>

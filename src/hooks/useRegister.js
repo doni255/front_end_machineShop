@@ -2,8 +2,14 @@ import { useState, useRef } from "react";
 // import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; // Import toast
+import { disableInstantTransitions } from "framer-motion";
 
 export const useRegister = () => {
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const openRegisterModal = () => setIsRegisterModalOpen(true);
+  const closeRegisterModal = () => setIsRegisterModalOpen(false);
+
   const navigate = useNavigate();
 
   const namaRef = useRef();
@@ -70,21 +76,36 @@ export const useRegister = () => {
 
     // Submit logic
     try {
-      const response = await fetch("https://backendtokomesin.grhapengharapan.org/api/store_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://backendtokomesin.grhapengharapan.org/api/store_user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
+
+      if (response.status === 400) {
+        if (result.data.nama) {
+          // Handle name uniqueness error from backend
+          toast.error(result.data.nama[0]); // Display the error message for 'nama'
+          return;
+        }
+      }
+
       console.log("Result:", result);
 
-      // Show success toast
-      toast.success("Registration successful!");
-
-      navigate("/e-commerce", { state: { registrationSuccess: true } });  
+      // Close the modal
+      setIsRegisterModalOpen(false);
+      // Delay for 2 seconds before showing the success toast
+      setTimeout(() => {
+        toast.success("User registered successfully!"); // Success toast
+        navigate("/e-commerce/products"); // Navigate to the products page
+      }, 2000); // 2-second delay before showing success
     } catch (error) {
       console.error("An unexpected error occurred.", error);
       toast.error("An error occurred during registration.");
@@ -95,5 +116,9 @@ export const useRegister = () => {
     formData,
     handleChange,
     handleSubmit,
+    isRegisterModalOpen,
+    setIsRegisterModalOpen,
+    openRegisterModal,
+    closeRegisterModal,
   };
 };
