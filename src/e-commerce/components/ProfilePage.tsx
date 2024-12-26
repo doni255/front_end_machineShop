@@ -27,10 +27,9 @@ const ProfilePage = () => {
       duration: 5000,
     });
 
+    navigate("/e-commerce/products"); // Redirect to the products page
+
     // Set a timeout to refresh the page after 5 seconds
-    setTimeout(() => {
-      window.location.reload(); // Refresh the page
-    }, 500); // Adjust the time as needed
   };
 
   const Logout = () => {
