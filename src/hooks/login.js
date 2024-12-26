@@ -50,8 +50,6 @@ const login = () => {
       });
 
       // Navigate to the ProfeilePage after succesful login
-      navigate("/e-commerce/profile");
-
       if (response.status === 200) {
         console.log(response.data.data);
         const { data } = response.data;
@@ -71,10 +69,14 @@ const login = () => {
         setRole(response.data.data.role);
 
         // Arahkan berdasarkan role
+
         if (response.data.data.role === "admin") {
           navigate("/dashboard");
         } else if (response.data.data.role === "supplier") {
           navigate("/dashboard/products");
+        } else if (response.data.data.role === "user") {
+          navigate("/e-commerce/profile");
+          console.log(response.data.data.role);
         }
         // window.location.reload();
       }
