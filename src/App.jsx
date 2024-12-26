@@ -192,7 +192,7 @@ function App() {
                   }
                 />
               </Route>
-              <Route path="profile" element={<ProfilePage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route path="cartproduct" element={<CartProduct />} />
 
               <Route path="history" element={<History />} />
