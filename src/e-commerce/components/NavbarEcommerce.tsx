@@ -93,6 +93,7 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
     const role = localStorage.getItem("role");
     if (role === "user") {
       navigate("/e-commerce"); // Redirect to e-commerce page after login
+      setIsLoginModalOpen(false);
     }
 
     // After login, store user data to localStorage

@@ -77,6 +77,7 @@ const login = () => {
         } else if (response.data.data.role === "user") {
           navigate("/e-commerce/profile");
           console.log(response.data.data.role);
+          
         }
         // window.location.reload();
       }

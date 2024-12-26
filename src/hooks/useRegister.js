@@ -70,7 +70,7 @@ export const useRegister = () => {
 
     // Submit logic
     try {
-      const response = await fetch("https://backendtokomesin.grhapengharapan.org/store_user", {
+      const response = await fetch("https://backendtokomesin.grhapengharapan.org/api/store_user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,10 +84,7 @@ export const useRegister = () => {
       // Show success toast
       toast.success("Registration successful!");
 
-      navigate("/e-commerce", { state: { registrationSuccess: true } });
-      setTimeout(() => {
-        window.location.reload(); // Reload the page after a short delay
-      }, 1000); // Adjust the delay if needed
+      navigate("/e-commerce", { state: { registrationSuccess: true } });  
     } catch (error) {
       console.error("An unexpected error occurred.", error);
       toast.error("An error occurred during registration.");
