@@ -56,9 +56,9 @@ const NavbarEcommerce = ({ setShowCart }: NavbarProps) => {
     handleLogin,
   } = login();
 
-  const { isRegisterModalOpen, setIsRegisterModalOpen } = useRegister();
+  const { isRegisterModalOpen, setIsRegisterModalOpen, formData, handleChange, handleSubmit} = useRegister();
 
-  const { formData, handleChange, handleSubmit } = useRegister();
+  // const { formData, handleChange, handleSubmit } = useRegister();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredProducts, setFilteredProducts] = useState<any[]>([]); // Adjust type according to your product data structure
   const [isProfileModalOpen, setisProfileModalOpen] = useState<boolean>(false);

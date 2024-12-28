@@ -21,14 +21,6 @@ import {
   HiPlus,
 } from "react-icons/hi";
 
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  // DropdownSection,
-  DropdownItem,
-} from "@nextui-org/dropdown";
-
 import Pagination from "../consts/Pagination";
 import TambahStockProduct from "./button/button_product/TambahStockProduct";
 
@@ -46,13 +38,12 @@ export default function Products({ productId, userId }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
-  const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isModalTambahStokOpen, setisModalTambahStockOpen] = useState(false);
-  const [selectedTambahStock, setSelectedTambahStock] = useState(null);
-  const [existingImage, setExistingImage] = useState(""); // State untuk menyimpan gambar yang ada
-  const [userRole, setUserRole] = useState(null);
+
+   // Tambahkan state untuk userRole
+   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     // Fetch user role from an API or some source
@@ -64,26 +55,9 @@ export default function Products({ productId, userId }) {
     // Mock function: Replace with actual API call
     return "supplier"; // Or 'admin'
   };
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [imageError, setImageError] = useState("");
 
   const toggleModalCreate = () => {
     setIsModalOpenCreate(!isModalOpenCreate);
-  };
-
-  const toggleModalTambahStock = () => {
-    setisModalTambahStockOpen(isModalTambahStokOpen);
-  };
-
-  // Function to handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log(`Change ${name} to ${value}`);
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
   };
 
   const [formDataStock, setFormDataStock] = useState({
@@ -196,129 +170,6 @@ export default function Products({ productId, userId }) {
     return new Blob([uintArray], { type: "image/jpeg" }); // Adjust MIME type as needed
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { name, kategori_produk, harga_beli, harga_jual, stock, imageUrl } = formData;
-
-  //   // Validate required fields
-  //   if (!name || !kategori_produk || !harga_beli || !harga_jual || !stock) {
-  //     toast.error("Please fill out all required fields.");
-  //     return;
-  //   }
-
-  //   // Display the value that we input
-  //   console.log(formData);
-
-  //   const base64Image = imageUrl ? imageUrl.split(",")[1] : null;
-  //   const newItem = {
-  //     nama_product: name,
-  //     kategori_produk: kategori_produk,
-  //     harga_beli: harga_beli,
-  //     harga_jual: harga_jual,
-  //     konten_base64: base64Image,
-  //     jumlah_stock: stock,
-  //   };
-
-  //   console.log(newItem); // Debug log to check the structure of newItem
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/api/create",
-  //       newItem,
-  //       {
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     console.log("Response dari server:", response);
-
-  //     if (response.status >= 200 && response.status < 300) {
-  //       // Success handling
-  //       toggleModalCreate();
-  //       toast.success("Product berhasil ditambahkan!", { duration: 3000 });
-
-  //       // Refresh product list after successful addition
-  //       fetchProducts();  // Call fetchProducts after a successful post request
-  //     } else {
-  //       console.log("Unexpected response status:", response.status);
-  //       toast.error("Failed to add product.");
-  //     }
-  //   } catch (error) {
-  //     // Log the full error object to debug further
-  //     console.error("Error saat mengirim data:", error);
-
-  //     if (error.response) {
-  //       console.error("Response error:", error.response.data);  // Logs the error response from the server
-  //     }
-
-  //     if (error.request) {
-  //       console.error("Request error:", error.request);  // Logs the request if no response was received
-  //     }
-
-  //     if (!error.response && !error.request) {
-  //       console.error("General error:", error.message);  // Any other error that occurs
-  //     }
-
-  //     toast.error("Something went wrong while adding the product.");
-  //     toggleModalCreate();
-  //   }
-
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { name, kategori_produk, harga_beli, harga_jual, stock, imageUrl } =
-  //     formData;
-
-  //   // Validate required fields
-  //   if (!name || !kategori_produk || !harga_beli || !harga_jual || !stock) {
-  //     toast.error("Please fill out all required fields.");
-  //     return;
-  //   }
-
-  //   // Display the value that we input
-  //   console.log(formData);
-
-  //   // Lanjutkan ke pengiriman data jika semua field sudah terisi
-  //   const base64Image = imageUrl ? imageUrl.split(",")[1] : null;
-  //   const newItem = {
-  //     nama_product: name,
-  //     kategori_produk: kategori_produk,
-  //     harga_beli: harga_beli,
-  //     harga_jual: harga_jual,
-  //     konten_base64: base64Image,
-  //     jumlah_stock: stock,
-  //   };
-
-  //   console.log(newItem); // Debug log to check the structure of newItem
-
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/api/create",
-  //       newItem,
-  //       {
-  //         headers: {
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json", // Gunakan application/json
-  //         },
-  //       }
-  //     );
-
-  //     console.log("Response dari server:", response);
-  //     toggleModalCreate();
-  //     fetchProducts();
-  //     toast.success("Product berhasil ditambahkan!", {
-  //       duration: 3000,
-  //     });
-  //   } catch (error) {
-  //     console.log("Error saat mengirim data:", error);
-  //     toggleModalCreate();
-  //   }
-  // };
-
   const handleTambahStockClick = (id_product) => {
     console.log(`handleTambahStockClick called with id_product: ${id_product}`);
     setSelectedProduct(id_product);
@@ -334,9 +185,18 @@ export default function Products({ productId, userId }) {
     const { jumlah_stock, id_product } = formDataStock;
 
     // Validate inputs
-    if (!jumlah_stock) {
-      alert("Jumlah stock harus di isi!");
-      return;
+    // Validate inputs
+    if (!jumlah_stock || jumlah_stock <= 0) {
+      if (jumlah_stock <= 0) {
+        toast.error("Jumlah tidak bisa kosong", {
+          duration: 3000,
+        });
+      } else {
+        toast.error("Jumlah stock harus diisi!", {
+          duration: 3000,
+        });
+      }
+      return; // Stop execution if validation fails
     }
 
     const newItem = {
@@ -465,7 +325,9 @@ export default function Products({ productId, userId }) {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("https://backendtokomesin.grhapengharapan.org/api/product");
+      const response = await axios.get(
+        "https://backendtokomesin.grhapengharapan.org/api/product"
+      );
       setProducts(response.data.data || []); // Mengakses array produk di dalam response.data.data
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -490,7 +352,9 @@ export default function Products({ productId, userId }) {
     try {
       console.log(`destroyProduct called with id_product: ${id_product}`);
       // Send DELETE request to the backend
-      await axios.delete(`https://backendtokomesin.grhapengharapan.org/api/product/${id_product}`);
+      await axios.delete(
+        `https://backendtokomesin.grhapengharapan.org/api/product/${id_product}`
+      );
 
       // Update the frontend state
       setProducts((prevProducts) =>
@@ -515,52 +379,6 @@ export default function Products({ productId, userId }) {
     setSelectedProduct(id_product);
     setIsBuyModalOpen(true);
   };
-
-  // const handlePembelianProduct = async (e, id_product) => {
-  //   e.preventDefault();
-  //   const { jumlah_stock } = formDataStock; // Hapus id_product jika tidak dibutuhkan
-
-  //   // Validate inputs
-  //   if (!jumlah_stock) {
-  //     toast.error("Jumlah stock harus di isi!", {
-  //       duration: 3000,
-  //     });
-  //     return;
-  //   }
-
-  //   const newItem = {
-  //     jumlah_stock: jumlah_stock,
-  //   };
-  //   console.log(newItem);
-
-  //   console.log(setSelectedProduct());
-  //   try {
-  //     const response = await axios.put(
-  //       `http://localhost:8000/api/product/pembelian_product/${id_product}`, // Gunakan id_product dari parameter
-  //       newItem,
-  //       {
-  //         headers: {
-  //           Accept: "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     // Handle successful response
-  //     if (response.status === 200 || response.status === 201) {
-  //       toast.success("Pembelian Produk Berhasil", {
-  //         duration: 3000,
-  //       });
-  //       setIsBuyModalOpen(false);
-  //     }
-
-  //     // Optionally refresh the list or fetch updated data
-  //     fetchProducts(); // Pastikan fungsi ini ada dan bekerja dengan benar
-  //   } catch (error) {
-  //     // Handle errors (network issues, server errors, etc.)
-  //     console.error("Gagal melakukan pembelian:", error);
-  //     alert("Terjadi kesalahan");
-  //   }
-  // };
 
   const handlePembelianProduct = async (e, id_product) => {
     e.preventDefault();

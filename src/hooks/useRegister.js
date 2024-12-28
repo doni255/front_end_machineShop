@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 // import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast"; // Import toast
-import { disableInstantTransitions } from "framer-motion";
 
 export const useRegister = () => {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -105,9 +104,8 @@ export const useRegister = () => {
       setTimeout(() => {
         toast.success("User registered successfully!"); // Success toast
         navigate("/e-commerce/products"); // Navigate to the products page
-      }, 2000); // 2-second delay before showing success
+      }, 1000); // 2-second delay before showing success
     } catch (error) {
-      console.error("An unexpected error occurred.", error);
       toast.error("An error occurred during registration.");
     }
   };
