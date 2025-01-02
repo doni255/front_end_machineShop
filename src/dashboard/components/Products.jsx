@@ -135,7 +135,7 @@ export default function Products({ productId, userId }) {
 
     try {
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org//api/create",
+        "https://backendtokomesin.grhapengharapan.org/api/create",
         formDataToSend,
         {
           headers: {
@@ -208,7 +208,7 @@ export default function Products({ productId, userId }) {
     try {
       // Make the POST request to your API endpoint
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/tambah_stock/create/" + // Adjust the endpoint URL as needed
+        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/create/" + // Adjust the endpoint URL as needed
           localStorage.getItem("id_user"),
         newItem,
         {
@@ -273,7 +273,7 @@ export default function Products({ productId, userId }) {
     try {
       // Mengirim FormData melalui axios
       const response = await axios.post(
-        `https://backendtokomesin.grhapengharapan.org/product/${selectedProduct.id_product}`,
+        `https://backendtokomesin.grhapengharapan.org/api/product/${selectedProduct.id_product}`,
         formData,
         {
           headers: {
