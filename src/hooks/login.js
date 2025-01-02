@@ -20,9 +20,7 @@ const login = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        "https://backendtokomesin.grhapengharapan.org/api/users"
-      );
+      const response = await axios.get("https://backendtokomesin.grhapengharapan.org/api/users");
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -46,13 +44,10 @@ const login = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/login",
-        {
-          nama: nama.trim(), // Nama pengguna
-          password: password.trim(), // Password pengguna
-        }
-      );
+      const response = await axios.post("https://backendtokomesin.grhapengharapan.org/api/login", {
+        nama: nama.trim(), // Nama pengguna
+        password: password.trim(), // Password pengguna
+      });
 
       // Navigate to the ProfeilePage after succesful login
       if (response.status === 200) {
@@ -76,13 +71,13 @@ const login = () => {
         // Arahkan berdasarkan role
 
         if (response.data.data.role === "admin") {
-          // Navigate to the dashboard without reloading the page
-          navigate("/dashboard", { replace: true });
+          navigate("/dashboard");
         } else if (response.data.data.role === "supplier") {
-          navigate("/dashboard/products");
+          navigate("/dashboard");
         } else if (response.data.data.role === "user") {
           navigate("/e-commerce/profile");
           console.log(response.data.data.role);
+          
         }
         // window.location.reload();
       }
