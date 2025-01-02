@@ -15,7 +15,7 @@ const TrackOrder = () => {
   const fetchTrackOrder = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/status_pengiriman_produk/${localStorage.getItem(
+        `https://backendtokomesin.grhapengharapan.org/api/status_pengiriman_produk/${localStorage.getItem(
           "id_user"
         )}`
       );
@@ -56,7 +56,7 @@ const TrackOrder = () => {
         `https://backendtokomesin.grhapengharapan.org/api/konfirmasi_penerimaan_produk/${selectedIdBeliProduk}`
       );
       toast.success("Pesanan Diterima");
-      fetchTrackOrder(); // Refresh track order data
+      fetchTrackOrder(response); // Refresh track order data
     } catch (error) {
       console.error(error);
       toast.error("Gagal menerima pesanan");
