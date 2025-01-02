@@ -72,6 +72,9 @@ const login = () => {
 
         if (response.data.data.role === "admin") {
           navigate("/dashboard");
+
+          // Reload the page after successful login
+          window.location.reload();
         } else if (response.data.data.role === "supplier") {
           navigate("/dashboard/products");
         } else if (response.data.data.role === "user") {
