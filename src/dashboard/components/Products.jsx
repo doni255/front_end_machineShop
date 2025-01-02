@@ -42,8 +42,8 @@ export default function Products({ productId, userId }) {
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isModalTambahStokOpen, setisModalTambahStockOpen] = useState(false);
 
-   // Tambahkan state untuk userRole
-   const [userRole, setUserRole] = useState(null);
+  // Tambahkan state untuk userRole
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     // Fetch user role from an API or some source
@@ -135,7 +135,7 @@ export default function Products({ productId, userId }) {
 
     try {
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/create",
+        "https://backendtokomesin.grhapengharapan.org//api/create",
         formDataToSend,
         {
           headers: {
@@ -208,7 +208,7 @@ export default function Products({ productId, userId }) {
     try {
       // Make the POST request to your API endpoint
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/create/" + // Adjust the endpoint URL as needed
+        "https://backendtokomesin.grhapengharapan.org/tambah_stock/create/" + // Adjust the endpoint URL as needed
           localStorage.getItem("id_user"),
         newItem,
         {
@@ -251,7 +251,6 @@ export default function Products({ productId, userId }) {
   const handleEditClick = (product) => {
     setSelectedProduct(product); // Set produk yang dipilih
     setSelectedCategory(product.kategori_produk); // Set kategori produk
-    setExistingImage(product.gambar); // Set gambar yang sudah ada
     setIsEditModalOpen(true); // Buka modal edit
   };
 
@@ -274,7 +273,7 @@ export default function Products({ productId, userId }) {
     try {
       // Mengirim FormData melalui axios
       const response = await axios.post(
-        `https://backendtokomesin.grhapengharapan.org/api/product/${selectedProduct.id_product}`,
+        `https://backendtokomesin.grhapengharapan.org/product/${selectedProduct.id_product}`,
         formData,
         {
           headers: {
@@ -645,9 +644,6 @@ export default function Products({ productId, userId }) {
                     onChange={handleTambahProduct}
                     className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
                   />
-                  {imageError && (
-                    <p className="text-red-600 text-sm mt-1">{imageError}</p>
-                  )}
                 </div>
 
                 <div className="col-span-6">

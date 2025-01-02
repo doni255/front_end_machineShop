@@ -3,6 +3,7 @@ import axios from "axios";
 import { FaFileExcel, FaFilePdf } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
+import "jspdf-autotable";
 import Pagination from "../consts/Pagination";
 
 export default function Pengeluaran() {
@@ -19,7 +20,7 @@ export default function Pengeluaran() {
 
   const fetchPengeluaran = async () => {
     try {
-      const response = await axios.get("https://backendtokomesin.grhapengharapan.org/api/pengeluaran");
+      const response = await axios.get("http://localhost:8000/api/pengeluaran");
       console.log("Data fetched from API:", response.data);
       setPengeluaran(response.data);
     } catch (error) {
