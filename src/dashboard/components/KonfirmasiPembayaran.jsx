@@ -129,12 +129,15 @@ export default function KonfirmasiPembayaran() {
     console.log(idBeliProduk); // Log the ID to confirm it’s available
 
     axios
-      .delete(`https://backendtokomesin.grhapengharapan.org/api/hapus_keranjang/${idBeliProduk}`, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .delete(
+        `https://backendtokomesin.grhapengharapan.org/api/hapus_keranjang/${idBeliProduk}`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((response) => {
         if (response.status === 200) {
           console.log("Deletion successful");

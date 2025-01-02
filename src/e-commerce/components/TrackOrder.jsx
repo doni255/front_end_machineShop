@@ -56,7 +56,7 @@ const TrackOrder = () => {
         `https://backendtokomesin.grhapengharapan.org/api/konfirmasi_penerimaan_produk/${selectedIdBeliProduk}`
       );
       toast.success("Pesanan Diterima");
-      fetchTrackOrder(response); // Refresh track order data
+      fetchTrackOrder(); // Refresh track order data
     } catch (error) {
       console.error(error);
       toast.error("Gagal menerima pesanan");
