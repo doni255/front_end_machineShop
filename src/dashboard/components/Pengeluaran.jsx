@@ -20,7 +20,7 @@ export default function Pengeluaran() {
 
   const fetchPengeluaran = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/pengeluaran");
+      const response = await axios.get("https://backendtokomesin.grhapengharapan.org/api/pengeluaran");
       console.log("Data fetched from API:", response.data);
       setPengeluaran(response.data);
     } catch (error) {
