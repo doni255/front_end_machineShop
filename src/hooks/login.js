@@ -73,7 +73,7 @@ const login = () => {
         if (response.data.data.role === "admin") {
           navigate("/dashboard");
         } else if (response.data.data.role === "supplier") {
-          navigate("/dashboard");
+          navigate("/dashboard/products");
         } else if (response.data.data.role === "user") {
           navigate("/e-commerce/profile");
           console.log(response.data.data.role);
