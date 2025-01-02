@@ -103,7 +103,7 @@ export default function BarangMasukAdmin() {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/barang_masuk_admin`
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk_admin`
       );
       setProducts(response.data.data || []); // Mengakses array produk di dalam response.data.data
     } catch (error) {
@@ -146,7 +146,7 @@ export default function BarangMasukAdmin() {
       );
       // Send DELETE request to the backend
       await axios.delete(
-        `http://localhost:8000/api/barang_masuk/${id_barang_masuk}`
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/${id_barang_masuk}`
       );
 
       // Update the frontend state
