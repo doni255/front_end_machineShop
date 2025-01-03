@@ -63,10 +63,13 @@ const History = () => {
         </div>
         <div style="margin-bottom: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">
           <span style="font-weight: bold; color: #333;">Harga Total:</span>
-          <span style="color: #555;">${item.harga_total_jual.toLocaleString("id-ID", {
-            style: "currency",
-            currency: "IDR",
-          })}</span>
+          <span style="color: #555;">${item.harga_total_jual.toLocaleString(
+            "id-ID",
+            {
+              style: "currency",
+              currency: "IDR",
+            }
+          )}</span>
         </div>
         <div style="margin-bottom: 15px; display: flex; justify-content: space-between; border-bottom: 1px solid #e0e0e0; padding-bottom: 10px;">
           <span style="font-weight: bold; color: #333;">Tanggal Pembelian:</span>

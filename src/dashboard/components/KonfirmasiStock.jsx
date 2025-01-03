@@ -35,7 +35,6 @@ export default function KonfirmasiStock() {
   const [selectedUserConfirm, setSelectedUserConfirm] = useState(null);
 
   const konfirmasiBarangMasuk = () => {
-
     const formData = new FormData();
     formData.append("id_product", selectedKonfirmasiStock);
 

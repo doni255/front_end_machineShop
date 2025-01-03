@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const   useCustomers = (users, setUsers) => {
+const useCustomers = (users, setUsers) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -34,7 +34,6 @@ const   useCustomers = (users, setUsers) => {
       no_telpon: "",
     });
   };
-
   const handleDeleteClick = (id_user) => {
     setSelectedUser(id_user);
     setIsModalOpen(true);
@@ -43,7 +42,9 @@ const   useCustomers = (users, setUsers) => {
   const handleDelete = async () => {
     if (selectedUser) {
       try {
-        await axios.delete(`https://backendtokomesin.grhapengharapan.org/api/users/${selectedUser}`);
+        await axios.delete(
+          `  https://backendtokomesin.grhapengharapan.org/api/users/${selectedUser}`
+        );
         setUsers((prevUsers) =>
           prevUsers.filter((user) => user.id_user !== selectedUser)
         );
@@ -89,7 +90,7 @@ const   useCustomers = (users, setUsers) => {
       console.log("Selected User ID:", editUserData.id_user);
       console.log("Edit User Data:", editUserData);
 
-      const { nama, role, alamat, kota, no_telpon} = editUserData; // Extract the required fields
+      const { nama, role, alamat, kota, no_telpon } = editUserData; // Extract the required fields
 
       // Validate required fields
       if (!nama || !role || !alamat || !kota || !no_telpon) {
@@ -101,7 +102,7 @@ const   useCustomers = (users, setUsers) => {
 
       try {
         const response = await axios.put(
-          `https://backendtokomesin.grhapengharapan.org/api/users/${editUserData.id_user}`,
+          `  https://backendtokomesin.grhapengharapan.org/api/users/${editUserData.id_user}`,
           {
             ...editUserData,
             email: editUserData.email === "" ? null : editUserData.email, // Send null if email is empty
@@ -195,13 +196,16 @@ const   useCustomers = (users, setUsers) => {
       return;
     }
     try {
-      const response = await fetch("https://backendtokomesin.grhapengharapan.org/api/store_user", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://backendtokomesin.grhapengharapan.org/api/store_user",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       // Check if the response is successful
       if (response.ok) {

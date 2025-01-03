@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { FiLayers } from "react-icons/fi";
 
 import EditButton from "./button/button_product/EditButton";
@@ -34,7 +34,7 @@ const status = [
   { name: "Under Review", icon: <HiOutlineMail className="w-6 h-6" /> },
 ];
 
-export default function Products({ productId, userId }) {
+export default function Products({ products }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
@@ -42,13 +42,17 @@ export default function Products({ productId, userId }) {
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isModalTambahStokOpen, setisModalTambahStockOpen] = useState(false);
 
-  // Tambahkan state untuk userRole
-  const [userRole, setUserRole] = useState(null);
+  const [role, setUserRole] = useState("");
 
   useEffect(() => {
-    // Fetch user role from an API or some source
-    fetchUserRole().then((role) => setUserRole(role));
+    // Mengambil role dari localStorage
+    const storedRole = localStorage.getItem("role");
+    if (storedRole) {
+      setUserRole(storedRole);
+    }
   }, []);
+
+  console.log("Current user role:", role); // Debug role in render
 
   // Define fetchUserRole function or import it
   const fetchUserRole = async () => {
@@ -794,20 +798,21 @@ export default function Products({ productId, userId }) {
                   </td>
                   {/* <td className="py-4 px-4 text-center">{product.createdAt}</td> */}
                   <td className="py-4 px-4 text-center block">
+                    {/* ADMIN BUTTONS */}
                     {role === "admin" && (
-                      <EditButton onClick={() => handleEditClick(product)} />
+                      <>
+                        <EditButton onClick={() => handleEditClick(product)} />
+                        <DeleteButton
+                          onClick={() => handleDeleteClick(product.id_product)}
+                        />
+                        <PembelianButton
+                          onClick={() =>
+                            handlePembelianClick(product.id_product)
+                          }
+                        />
+                      </>
                     )}
-                    {role === "admin" && (
-                      <DeleteButton
-                        onClick={() => handleDeleteClick(product.id_product)}
-                      />
-                    )}
-                    {role === "admin" && (
-                      <PembelianButton
-                        onClick={() => handlePembelianClick(product.id_product)}
-                      />
-                    )}
-                    {/* BUTTON CREATE ITEM */}
+                    {/* SUPPLIER BUTTON */}
                     {role === "supplier" && (
                       <TambahStockProduct
                         onClick={() =>

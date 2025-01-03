@@ -146,7 +146,7 @@ export default function BarangMasukAdmin() {
       );
       // Send DELETE request to the backend
       await axios.delete(
-        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/${id_barang_masuk}`
+        `  https://backendtokomesin.grhapengharapan.org/api/barang_masuk/${id_barang_masuk}`
       );
 
       // Update the frontend state
