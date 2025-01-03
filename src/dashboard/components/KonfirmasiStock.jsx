@@ -113,6 +113,11 @@ export default function KonfirmasiStock() {
       const response = await axios.get(
         `https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/`
       );
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+      body: JSON.stringfy(data),
       setTambahStocks(response.data.data || []); // Mengakses array produk di dalam response.data.data
     } catch (error) {
       console.error("Error fetching products:", error);
