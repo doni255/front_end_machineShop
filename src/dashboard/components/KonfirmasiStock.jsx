@@ -35,6 +35,7 @@ export default function KonfirmasiStock() {
   const [selectedUserConfirm, setSelectedUserConfirm] = useState(null);
 
   const konfirmasiBarangMasuk = () => {
+
     const formData = new FormData();
     formData.append("id_product", selectedKonfirmasiStock);
 
@@ -44,7 +45,7 @@ export default function KonfirmasiStock() {
 
     axios
       .post(
-        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/konfirmasi_tambah_stock",
+        "http://localhost:8000/api/tambah_stock_admin/konfirmasi_tambah_stock",
         formData,
         {
           headers: {
@@ -111,7 +112,7 @@ export default function KonfirmasiStock() {
   const fetchTambahStock = async () => {
     try {
       const response = await axios.get(
-        `https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/`
+        `http://localhost:8000/api/tambah_stock_admin/`
       );
       setTambahStocks(response.data.data || []); // Mengakses array produk di dalam response.data.data
     } catch (error) {
@@ -146,7 +147,7 @@ export default function KonfirmasiStock() {
           `handleDelete called with id_tambah_stock: ${selectedKonfirmasiStock.id_tambah_stock}`
         );
         await axios.delete(
-          `https://backendtokomesin.grhapengharapan.org/api/tambah_stock/destroy/${selectedKonfirmasiStock.id_tambah_stock}`
+          `http://localhost:8000/api/tambah_stock/destroy/${selectedKonfirmasiStock.id_tambah_stock}`
         );
         toast.success("Product berhasil di tolak !", {
           duration: 5000,

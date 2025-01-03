@@ -17,9 +17,7 @@ function DashboardStatsGrid() {
   useEffect(() => {
     const fetchTotalUsers = async () => {
       try {
-        const response = await fetch(
-          "  https://backendtokomesin.grhapengharapan.org/api/total-users"
-        );
+        const response = await fetch("http://localhost:8000/api/total-users");
         const data = await response.json();
         setTotalUsers(data.totalUsers);
       } catch (error) {
@@ -34,9 +32,7 @@ function DashboardStatsGrid() {
   useEffect(() => {
     const fetchTotalStock = async () => {
       try {
-        const response = await fetch(
-          "https://backendtokomesin.grhapengharapan.org/api/total-stock"
-        );
+        const response = await fetch("http://localhost:8000/api/total-stock");
         const data = await response.json();
         setTotalStock(data.totalStock);
       } catch (error) {
@@ -51,9 +47,7 @@ function DashboardStatsGrid() {
   useEffect(() => {
     const fetchTotalTambahStock = async () => {
       try {
-        const response = await fetch(
-          "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/"
-        );
+        const response = await fetch("http://localhost:8000/api/tambah_stock/");
         const data = await response.json();
         setTotalTambahStock(data.total_jumlah_stock);
       } catch (error) {
@@ -75,9 +69,7 @@ function DashboardStatsGrid() {
   useEffect(() => {
     const fetchTotalUang = async () => {
       try {
-        const response = await fetch(
-          "  https://backendtokomesin.grhapengharapan.org/api/uang"
-        );
+        const response = await fetch("http://localhost:8000/api/uang");
         const data = await response.json();
         console.log("Fetched Data: ", data);
 

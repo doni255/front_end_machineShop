@@ -8,7 +8,7 @@ const FeatureSpeedBoat_SparePart = () => {
 
   useEffect(() => {
     axios
-      .post("https://backendtokomesin.grhapengharapan.org/api/product/categories", {
+      .post("http://localhost:8000/api/product/categories", {
         categories: ["spare part mesin kapal", "mesin kapal", "speed boat"],
       })
       .then((response) => {

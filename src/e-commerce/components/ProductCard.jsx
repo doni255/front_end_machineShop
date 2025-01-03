@@ -24,14 +24,14 @@ const ProductCard = ({ product }) => {
 
     const idUser = localStorage.getItem("id_user");
 
-    if (!idUser) {
+    if (!idUser ) {
       toast.error("Anda harus login terlebih dahulu.");
       return;
     }
 
     axios
       .post(
-        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/tambah_keranjang/${idUser}`,
+        `http://localhost:8000/api/keranjang_pembelian/tambah_keranjang/${idUser}`,
         {
           id_user: idUser,
           id_product: idProduct,
@@ -41,13 +41,15 @@ const ProductCard = ({ product }) => {
         }
       )
       .then((response) => {
-        toast.success(response.data.message);
+        toast.success(response.data.message)
       })
       .catch((error) => {
         console.error("Error tambah keranjang:", error);
         if (error.response) {
           console.log("Error response data:", error.response.data);
-          toast.error(error.response.data.message);
+          toast.error(
+            error.response.data.message
+          );
         }
       });
   };

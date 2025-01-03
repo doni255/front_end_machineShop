@@ -34,7 +34,7 @@ const status = [
   { name: "Under Review", icon: <HiOutlineMail className="w-6 h-6" /> },
 ];
 
-export default function Products({ products }) {
+export default function Products() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpenCreate, setIsModalOpenCreate] = useState(false);
@@ -139,7 +139,7 @@ export default function Products({ products }) {
 
     try {
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/create",
+        "http://localhost:8000/api/create",
         formDataToSend,
         {
           headers: {
@@ -212,7 +212,7 @@ export default function Products({ products }) {
     try {
       // Make the POST request to your API endpoint
       const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/create/" + // Adjust the endpoint URL as needed
+        "http://localhost:8000/api/tambah_stock/create/" + // Adjust the endpoint URL as needed
           localStorage.getItem("id_user"),
         newItem,
         {
@@ -277,7 +277,7 @@ export default function Products({ products }) {
     try {
       // Mengirim FormData melalui axios
       const response = await axios.post(
-        `https://backendtokomesin.grhapengharapan.org/api/product/${selectedProduct.id_product}`,
+        `http://localhost:8000/api/product/${selectedProduct.id_product}`,
         formData,
         {
           headers: {
@@ -328,9 +328,7 @@ export default function Products({ products }) {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        "https://backendtokomesin.grhapengharapan.org/api/product"
-      );
+      const response = await axios.get("http://localhost:8000/api/product");
       setProducts(response.data.data || []); // Mengakses array produk di dalam response.data.data
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -355,9 +353,7 @@ export default function Products({ products }) {
     try {
       console.log(`destroyProduct called with id_product: ${id_product}`);
       // Send DELETE request to the backend
-      await axios.delete(
-        `https://backendtokomesin.grhapengharapan.org/api/product/${id_product}`
-      );
+      await axios.delete(`http://localhost:8000/api/product/${id_product}`);
 
       // Update the frontend state
       setProducts((prevProducts) =>
@@ -401,7 +397,7 @@ export default function Products({ products }) {
 
     try {
       const response = await axios.put(
-        `https://backendtokomesin.grhapengharapan.org/api/product/pembelian_product/${id_product}`,
+        `http://localhost:8000/api/product/pembelian_product/${id_product}`,
         newItem,
         {
           headers: {

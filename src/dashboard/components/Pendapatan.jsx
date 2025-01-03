@@ -22,9 +22,7 @@ export default function Pendapatan() {
   // Fetch pendapatan data from the API
   const fetchPendapatan = async () => {
     try {
-      const response = await axios.get(
-        "https://backendtokomesin.grhapengharapan.org/api/pendapatan"
-      );
+      const response = await axios.get("http://localhost:8000/api/pendapatan");
       console.log("Data fetched from API:", response.data);
       setPendapatan(response.data);
       setLoading(false);

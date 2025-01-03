@@ -75,16 +75,13 @@ export const useRegister = () => {
 
     // Submit logic
     try {
-      const response = await fetch(
-        "https://backendtokomesin.grhapengharapan.org/api/store_user",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("http://localhost:8000/api/store_user", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const result = await response.json();
 

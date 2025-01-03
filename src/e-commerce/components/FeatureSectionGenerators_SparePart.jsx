@@ -9,7 +9,7 @@ const FeatureSectionGenerators_SparePart = () => {
   useEffect(() => {
     // Fetch products by category "Genset"
     axios
-      .post("https://backendtokomesin.grhapengharapan.org/api/product/categories", {
+      .post("http://localhost:8000/api/product/categories", {
         categories: ["Genset", "Spare Part Genset"],
       })
       .then((response) => {

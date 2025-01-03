@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-  baseURL: "https://backendtokomesin.grhapengharapan.org/api/",
+  baseURL: "http://localhost:8000/api",
 });
 
 axiosClient.interceptors.request.use((config) => {

@@ -23,7 +23,7 @@ const CartProduct = () => {
   const fetchCartProduct = async () => {
     try {
       const response = await axios.get(
-        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/` +
+        `http://localhost:8000/api/keranjang_pembelian/` +
           localStorage.getItem("id_user")
       );
 
@@ -107,6 +107,7 @@ const CartProduct = () => {
 
   const handleCheckOutAll = () => {
     setIsCheckoutAllModalOpen(true);
+
   };
 
   const handleSubmitPayment = (e) => {
@@ -156,8 +157,8 @@ const CartProduct = () => {
         Keranjang Pembelian
       </h1>
 
-      {/* Modal with Transition */}
-      <Transition
+        {/* Modal with Transition */}
+        <Transition
         show={isCheckoutAllModalOpen}
         enter="transition ease-out duration-300 transform"
         enterFrom="opacity-0 scale-70"
@@ -198,8 +199,7 @@ const CartProduct = () => {
                       Rp
                       {cartProducts
                         .reduce(
-                          (acc, item) =>
-                            acc + item.product.harga_total * item.jumlah,
+                          (acc, item) => acc + item.product.harga_total * item.jumlah,
                           0
                         )
                         .toLocaleString()}
@@ -337,25 +337,22 @@ const CartProduct = () => {
             <form onSubmit={handleSubmitPayment}>
               {/* File Input */}
               <div className="mt-5">
-                <div>
-                  <p className="text-lg font-semibold">
-                    Harga Total:{" "}
-                    <span className="font-extralight">
-                      Rp
-                      {(() => {
-                        const selectedItem = cartProducts.find(
-                          (item) => item.id_beli_produk === selectedIdBeliProduk
-                        );
-                        return selectedItem
-                          ? (
-                              selectedItem.product.harga_total_jual *
-                              selectedItem.jumlah
-                            ).toLocaleString()
-                          : "0";
-                      })()}
-                    </span>
-                  </p>
-                </div>
+              <div>
+        <p className="text-lg font-semibold">
+          Harga Total:{" "}
+          <span className="font-extralight">
+            Rp
+            {(() => {
+              const selectedItem = cartProducts.find(
+                (item) => item.id_beli_produk === selectedIdBeliProduk
+              );
+              return selectedItem
+                ? (selectedItem.product.harga_total_jual * selectedItem.jumlah).toLocaleString()
+                : "0";
+            })()}
+          </span>
+        </p>
+      </div>
                 <label
                   htmlFor="file-upload"
                   className="block text-lg font-medium text-gray-700 mb-2"
@@ -682,7 +679,7 @@ const CartProduct = () => {
             </div>
 
             {/* Checkout All Button */}
-            {/* <div className="mt-6 flex justify-end">
+              {/* <div className="mt-6 flex justify-end">
                 <button
                   onClick={handleCheckOutAll}
                   className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold"

@@ -74,7 +74,7 @@ export default function Register() {
     }
     try {
       const response = await fetch(
-        "http://localhost:8000/api/store_user",
+        "https://backendtokomesin.grhapengharapan.org/api/store_user",
         {
           method: "POST",
           headers: {
