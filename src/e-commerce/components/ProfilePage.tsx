@@ -50,7 +50,7 @@ const ProfilePage = () => {
     //buatkan dengan axios
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/getDataUserByID/` +
+        `https://backendtokomesin.grhapengharapan.org/api/getDataUserByID/` +
           localStorage.getItem("id_user")
       );
       const data = response.data;

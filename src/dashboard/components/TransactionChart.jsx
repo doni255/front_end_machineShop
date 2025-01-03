@@ -20,11 +20,11 @@ function TransactionChart() {
   const fetchData = async (selectedYear) => {
     try {
       const incomeResponse = await axios.get(
-        `http://localhost:8000/api/grafik_pendapatan?year=${selectedYear}`
+        `https://backendtokomesin.grhapengharapan.org/api/grafik_pendapatan?year=${selectedYear}`
       );
 
       const expenseResponse = await axios.get(
-        `http://localhost:8000/api/grafik_pengeluaran?year=${selectedYear}`
+        `https://backendtokomesin.grhapengharapan.org/api/grafik_pengeluaran?year=${selectedYear}`
       );
 
       const combinedData = incomeResponse.data.map((income, index) => {

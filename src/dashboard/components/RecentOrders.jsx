@@ -49,7 +49,7 @@ export default function RecentOrders() {
 
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/get_product_status_pengiriman"
+        "https://backendtokomesin.grhapengharapan.org/api/get_product_status_pengiriman"
       );
       const data = response.data.data || [];
       console.log("data", data);
@@ -73,7 +73,7 @@ export default function RecentOrders() {
 
     axios
       .post(
-        `http://localhost:8000/api/update_status_shipped/${selectedKonfirmasiPembayaran}`,
+        `https://backendtokomesin.grhapengharapan.org/api/update_status_shipped/${selectedKonfirmasiPembayaran}`,
 
         {
           headers: {
@@ -112,7 +112,7 @@ export default function RecentOrders() {
 
     axios
       .post(
-        `http://localhost:8000/api/update_status_delivered/${selectedKonfirmasiPembayaran}`,
+        `https://backendtokomesin.grhapengharapan.org/api/update_status_delivered/${selectedKonfirmasiPembayaran}`,
         {
           headers: {
             Accept: "application/json",

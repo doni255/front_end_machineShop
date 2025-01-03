@@ -42,7 +42,7 @@ const useCustomers = (users, setUsers) => {
   const handleDelete = async () => {
     if (selectedUser) {
       try {
-        await axios.delete(`http://localhost:8000/api/users/${selectedUser}`);
+        await axios.delete(`https://backendtokomesin.grhapengharapan.org/api/users/${selectedUser}`);
         setUsers((prevUsers) =>
           prevUsers.filter((user) => user.id_user !== selectedUser)
         );
@@ -100,7 +100,7 @@ const useCustomers = (users, setUsers) => {
 
       try {
         const response = await axios.put(
-          `http://localhost:8000/api/users/${editUserData.id_user}`,
+          `  https://backendtokomesin.grhapengharapan.org/api/users/${editUserData.id_user}`,
           {
             ...editUserData,
             email: editUserData.email === "" ? null : editUserData.email, // Send null if email is empty

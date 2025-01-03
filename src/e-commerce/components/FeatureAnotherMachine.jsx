@@ -9,13 +9,16 @@ const FeatureAnotherMachine = () => {
   useEffect(() => {
     // Fetch products by category "Genset"
     axios
-      .post("http://localhost:8000/api/product/categories", {
-        categories: [
-          "mesin serat kayu",
-          "mesin bor listrik",
-          "pemotong rumput",
-        ],
-      })
+      .post(
+        "https://backendtokomesin.grhapengharapan.org/api/product/categories",
+        {
+          categories: [
+            "mesin serat kayu",
+            "mesin bor listrik",
+            "pemotong rumput",
+          ],
+        }
+      )
       .then((response) => {
         setProducts(response.data.data);
         setLoading(false);

@@ -20,7 +20,9 @@ const login = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/api/users");
+      const response = await axios.get(
+        "https://backendtokomesin.grhapengharapan.org/api/users"
+      );
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -44,10 +46,13 @@ const login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/login", {
-        nama: nama.trim(), // Nama pengguna
-        password: password.trim(), // Password pengguna
-      });
+      const response = await axios.post(
+        "https://backendtokomesin.grhapengharapan.org/api/login",
+        {
+          nama: nama.trim(), // Nama pengguna
+          password: password.trim(), // Password pengguna
+        }
+      );
 
       // Navigate to the ProfeilePage after succesful login
       if (response.status === 200) {
@@ -79,7 +84,6 @@ const login = () => {
         } else if (response.data.data.role === "user") {
           navigate("/e-commerce/profile");
           console.log(response.data.data.role);
-          
         }
         // window.location.reload();
       }

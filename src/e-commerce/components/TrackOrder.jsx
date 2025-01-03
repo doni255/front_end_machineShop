@@ -15,7 +15,7 @@ const TrackOrder = () => {
   const fetchTrackOrder = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/status_pengiriman_produk/${localStorage.getItem(
+        `https://backendtokomesin.grhapengharapan.org/api/status_pengiriman_produk/${localStorage.getItem(
           "id_user"
         )}`
       );
@@ -34,7 +34,7 @@ const TrackOrder = () => {
 
   //   try {
   //     const response = axios.post(
-  //       `http://localhost:8000/api/konfirmasi_penerimaan_produk/${selectedIdBeliProduk}`
+  //       `https://backendtokomesin.grhapengharapan.org/api/konfirmasi_penerimaan_produk/${selectedIdBeliProduk}`
   //     );
   //     toast.success("Pesanan Diterima");
   //     fetchTrackOrder();

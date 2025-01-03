@@ -69,7 +69,7 @@ export default function BarangMasuk() {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/barang_masuk/update/${selectedProduct.id_barang_masuk}`,
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/update/${selectedProduct.id_barang_masuk}`,
         formData,
         {
           headers: {
@@ -184,7 +184,7 @@ export default function BarangMasuk() {
 
     axios
       .post(
-        "http://localhost:8000/api/barang_masuk/create/" +
+        "https://backendtokomesin.grhapengharapan.org/api/barang_masuk/create/" +
           localStorage.getItem("id_user"),
         newItem,
         {
@@ -224,7 +224,7 @@ export default function BarangMasuk() {
     console.log(localStorage.getItem("id_user"));
     try {
       const response = await axios.get(
-        "http://localhost:8000/api/barang_masuk/" +
+        "https://backendtokomesin.grhapengharapan.org/api/barang_masuk/" +
           localStorage.getItem("id_user")
       );
       setProducts(response.data.data || []); // Mengakses array produk di dalam response.data.data
@@ -256,7 +256,7 @@ export default function BarangMasuk() {
       );
       // Send DELETE request to the backend
       await axios.delete(
-        `http://localhost:8000/api/barang_masuk/${id_barang_masuk}`
+        `https://backendtokomesin.grhapengharapan.org/api/barang_masuk/${id_barang_masuk}`
       );
 
       // Update the frontend state
