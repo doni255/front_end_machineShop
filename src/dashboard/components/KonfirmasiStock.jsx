@@ -34,6 +34,15 @@ export default function KonfirmasiStock() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserConfirm, setSelectedUserConfirm] = useState(null);
 
+  const cors = require("cors");
+
+  app.use(
+    cors({
+      origin: "https://backendtokomesin.grhapengharapan.org",
+      credentials: true,
+    })
+  );
+
   const konfirmasiBarangMasuk = () => {
     const formData = new FormData();
     formData.append("id_product", selectedKonfirmasiStock);
@@ -109,16 +118,16 @@ export default function KonfirmasiStock() {
   }, []);
 
   const fetchTambahStock = async () => {
+    console.log("fetching data");
     try {
       const response = await axios.get(
-        `https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/`
+        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/"
       );
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-      body: JSON.stringfy(data),
-      setTambahStocks(response.data.data || []); // Mengakses array produk di dalam response.data.data
+      const data = response.data.data || [];
+      console.log("data", data);
+
+      // setTambahStocks(response.data.data || []);
+      setTambahStocks(response.data.data || []); // Menghindari products menjadi undefined
     } catch (error) {
       console.error("Error fetching products:", error);
       setTambahStocks([]); // Menghindari products menjadi undefined
