@@ -2,6 +2,7 @@ import axios from "axios";
 
 const axiosClient = axios.create({
   baseURL: "https://backendtokomesin.grhapengharapan.org/api/",
+  withCredentials: true,
 });
 
 axiosClient.interceptors.request.use((config) => {

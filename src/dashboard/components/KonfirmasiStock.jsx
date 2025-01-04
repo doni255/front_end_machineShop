@@ -18,6 +18,7 @@ import ConfirmButton from "./button/button_product/ConfirmButton";
 import ConfirmProduct from "./button/button_product/ConfirmProduct";
 import RejectedButton from "./button/button_product/RejectedButton";
 import toast, { Toaster } from "react-hot-toast";
+import axiosClient from "../../axiosClient";
 
 const status = [
   { name: "Published", icon: <FiLayers className="w-6 h-6" /> },
@@ -33,15 +34,6 @@ export default function KonfirmasiStock() {
   const [selectedKonfirmasiStock, setSelectedKonfirmasiStock] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserConfirm, setSelectedUserConfirm] = useState(null);
-
-  const cors = require("cors");
-
-  app.use(
-    cors({
-      origin: "https://backendtokomesin.grhapengharapan.org",
-      credentials: true,
-    })
-  );
 
   const konfirmasiBarangMasuk = () => {
     const formData = new FormData();
@@ -120,14 +112,14 @@ export default function KonfirmasiStock() {
   const fetchTambahStock = async () => {
     console.log("fetching data");
     try {
-      const response = await axios.get(
-        "https://backendtokomesin.grhapengharapan.org/api/tambah_stock_admin/"
+      const response = await axiosClient.get(
+        "/tambah_stock_admin"
       );
       const data = response.data.data || [];
       console.log("data", data);
+      setTambahStocks(data);
 
-      // setTambahStocks(response.data.data || []);
-      setTambahStocks(response.data.data || []); // Menghindari products menjadi undefined
+      // setTambahStocks(response.data.data || []); 
     } catch (error) {
       console.error("Error fetching products:", error);
       setTambahStocks([]); // Menghindari products menjadi undefined
