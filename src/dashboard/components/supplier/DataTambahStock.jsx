@@ -126,15 +126,6 @@ export default function DataTambahStock() {
           <table className="w-full">
             <thead>
               <tr className="text-sm font-medium text-gray-700 border-b border-gray-200">
-                {/* <td className="pl-10 py-4">
-                  <div className="flex items-center gap-x-4">
-                    <input
-                      type="checkbox"
-                      className="w-6 h-6 text-indigo-600 rounded-md border-gray-300"
-                    />
-                    <span>ID</span>
-                  </div>
-                </td> */}
                 <td className=" text-center font-semibold">Product Name</td>
                 <td className="text-center font-semibold">Kategori Produk</td>
                 <td className=" text-center font-semibold">Jumlah</td>

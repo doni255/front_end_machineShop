@@ -10,6 +10,7 @@ const CartProduct = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [isCheckoutAllModalOpen, setIsCheckoutAllModalOpen] = useState(false);
+  const [paidProducts, setPaidProducts] = useState([]);
 
   // Bagian Gambar
   const [imagePreview, setImagePreview] = useState(null);
@@ -19,24 +20,6 @@ const CartProduct = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const navigate = useNavigate();
   const [selectedIdBeliProduk, setSelectedIdBeliProduk] = useState(null);
-
-  const fetchCartProduct = async () => {
-    try {
-      const response = await axios.get(
-        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/` +
-          localStorage.getItem("id_user")
-      );
-
-      if (response.data.message === "Retrieve data success") {
-        setCartProducts(response.data.data);
-      }
-
-      setIsLoaded(true);
-    } catch (error) {
-      setIsLoaded(true);
-      setCartProducts([]); // Reset the cartProducts state on error
-    }
-  };
 
   const deleteCartProduct = async (id_beli_produk) => {
     try {
@@ -48,6 +31,35 @@ const CartProduct = () => {
     } catch (error) {
       console.error("Error deleting cart products:", error);
       toast.error("Failed to delete cart product.");
+    }
+  };
+
+  const fetchCartProduct = async () => {
+    try {
+      const response = await axios.get(
+        `https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/` +
+          localStorage.getItem("id_user")
+      );
+
+      if (response.data.message === "Retrieve data success") {
+        // setCartProducts(response.data.data);
+        const products = response.data.data || [];
+        setCartProducts(products);
+
+        // Update paidProducts state for products with payment proof (bukti_pembayaran) or 'Lunas' status
+        const paidProductIds = products
+          .filter(
+            (product) =>
+              product.bukti_pembayaran || product.payment_status === "Lunas"
+          )
+          .map((product) => product.id_beli_produk);
+        setPaidProducts(paidProductIds);  
+      }
+
+      setIsLoaded(true);
+    } catch (error) {
+      setIsLoaded(true);
+      setCartProducts([]); // Reset the cartProducts state on error
     }
   };
 
@@ -63,42 +75,49 @@ const CartProduct = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+      // Success notification
       toast.success("Produk berhasil dibeli.");
+
+      // Update the paid products list dynamically
+      setPaidProducts((prev) => [...prev, id_beli_produk]);
+
+      // fetchCartProduct();
+      await fetchCartProduct();
+
       setIsPaymentModalOpen(false);
-      fetchCartProduct();
     } catch (error) {
       console.error("Error purchasing product:", error);
       toast.error("Gagal membeli produk.");
     }
   };
 
-  const CheckOutAll = async () => {
-    try {
-      if (!selectedFile) {
-        toast.error("Please select a payment proof file.");
-        return;
-      }
+  // const CheckOutAll = async () => {
+  //   try {
+  //     if (!selectedFile) {
+  //       toast.error("Please select a payment proof file.");
+  //       return;
+  //     }
 
-      const formData = new FormData();
-      formData.append("bukti_pembayaran", selectedFile);
+  //     const formData = new FormData();
+  //     formData.append("bukti_pembayaran", selectedFile);
 
-      const response = await axios.post(
-        "https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/beli_all_products",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+  //     const response = await axios.post(
+  //       "https://backendtokomesin.grhapengharapan.org/api/keranjang_pembelian/beli_all_products",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
 
-      toast.success("All products purchased successfully.");
-      fetchCartProduct(); // Update the cart after purchase
-    } catch (error) {
-      console.error("Error checking out all products:", error);
-      toast.error("Failed to checkout all products.");
-    }
-  };
+  //     toast.success("All products purchased successfully.");
+  //     fetchCartProduct(); // Update the cart after purchase
+  //   } catch (error) {
+  //     console.error("Error checking out all products:", error);
+  //     toast.error("Failed to checkout all products.");
+  //   }
+  // };
 
   const handlePaymentClick = (id_beli_produk) => {
     setSelectedIdBeliProduk(id_beli_produk);
@@ -156,7 +175,7 @@ const CartProduct = () => {
         Keranjang Pembelian
       </h1>
 
-      {/* Modal with Transition */}
+      {/* Modal checkout all products with Transition */}
       <Transition
         show={isCheckoutAllModalOpen}
         enter="transition ease-out duration-300 transform"
@@ -302,7 +321,7 @@ const CartProduct = () => {
         </div>
       </Transition>
 
-      {/* Modal with Transition */}
+      {/* Modal paymnet signle products with Transition */}
       <Transition
         show={isPaymentModalOpen}
         enter="transition ease-out duration-300 transform"
@@ -664,18 +683,34 @@ const CartProduct = () => {
                     </p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <button
+                    {/* <button
                       onClick={() => handlePaymentClick(item.id_beli_produk)} // Set product for payment
                       className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
                     >
                       Bayar Sekarang
-                    </button>
-                    <button
-                      onClick={() => deleteCartProduct(item.id_beli_produk)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 w-full" // Add w-full to make the button full width
-                    >
-                      Hapus
-                    </button>
+                    </button> */}
+                    {!paidProducts.includes(item.id_beli_produk) ? ( // Conditionally render button\
+                      <>
+                        <button
+                          onClick={() =>
+                            handlePaymentClick(item.id_beli_produk)
+                          }
+                          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                        >
+                          Bayar Sekarang
+                        </button>
+                        <button
+                          onClick={() => deleteCartProduct(item.id_beli_produk)}
+                          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 w-full" // Add w-full to make the button full width
+                        >
+                          Hapus
+                        </button>
+                      </>
+                    ) : (
+                      <span className="text-green-500 font-bold">
+                        Pembayaran Selesai
+                      </span> // Indicate payment
+                    )}
                   </div>
                 </div>
               ))}

@@ -112,14 +112,12 @@ export default function KonfirmasiStock() {
   const fetchTambahStock = async () => {
     console.log("fetching data");
     try {
-      const response = await axiosClient.get(
-        "/tambah_stock_admin"
-      );
+      const response = await axiosClient.get("/tambah_stock_admin");
       const data = response.data.data || [];
       console.log("data", data);
       setTambahStocks(data);
 
-      // setTambahStocks(response.data.data || []); 
+      // setTambahStocks(response.data.data || []);
     } catch (error) {
       console.error("Error fetching products:", error);
       setTambahStocks([]); // Menghindari products menjadi undefined
