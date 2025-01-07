@@ -1,19 +1,15 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useState, useEffect } from "react";
 import { FiLayers } from "react-icons/fi";
 import Modal from "./Modal";
 import axios from "axios";
 
 import {
-  HiFilter,
   HiOutlineEyeOff,
   HiOutlineMail,
   HiOutlinePencilAlt,
   HiOutlineXCircle,
-  HiPlus,
 } from "react-icons/hi";
 import Pagination from "../consts/Pagination";
-import { Menu } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import ConfirmButton from "./button/button_product/ConfirmButton";
 import ConfirmProduct from "./button/button_product/ConfirmProduct";
 import RejectedButton from "./button/button_product/RejectedButton";

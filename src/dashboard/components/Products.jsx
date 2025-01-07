@@ -13,7 +13,6 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 import {
-  HiFilter,
   HiOutlineEyeOff,
   HiOutlineMail,
   HiOutlinePencilAlt,
@@ -22,9 +21,7 @@ import {
 } from "react-icons/hi";
 
 import Pagination from "../consts/Pagination";
-import TambahStockProduct from "./button/button_product/TambahStockProduct";
-
-const role = localStorage.getItem("role"); // Ambil role dari localStorage
+import TambahStockProduct from "./button/button_product/TambahStockProduct";  
 
 const status = [
   { name: "Published", icon: <FiLayers className="w-6 h-6" /> },
@@ -53,12 +50,6 @@ export default function Products() {
   }, []);
 
   console.log("Current user role:", role); // Debug role in render
-
-  // Define fetchUserRole function or import it
-  const fetchUserRole = async () => {
-    // Mock function: Replace with actual API call
-    return "supplier"; // Or 'admin'
-  };
 
   const toggleModalCreate = () => {
     setIsModalOpenCreate(!isModalOpenCreate);

@@ -48,21 +48,21 @@ function DashboardStatsGrid() {
   }, []);
 
   // UseEffect untuk mengambil total tambah stock
-  useEffect(() => {
-    const fetchTotalTambahStock = async () => {
-      try {
-        const response = await fetch(
-          "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/"
-        );
-        const data = await response.json();
-        setTotalTambahStock(data.total_jumlah_stock);
-      } catch (error) {
-        console.error("Error fetching total tambah stock: ", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchTotalTambahStock = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         "https://backendtokomesin.grhapengharapan.org/api/tambah_stock/"
+  //       );
+  //       const data = await response.json();
+  //       setTotalTambahStock(data.total_jumlah_stock);
+  //     } catch (error) {
+  //       console.error("Error fetching total tambah stock: ", error);
+  //     }
+  //   };
 
-    fetchTotalTambahStock();
-  }, []);
+  //   fetchTotalTambahStock();
+  // }, []);
 
   const formatRupiah = (amount) => {
     return new Intl.NumberFormat("id-ID", {
@@ -143,8 +143,7 @@ function DashboardStatsGrid() {
         </div>
       </BoxWrapper>
 
-      <BoxWrapper>
-        {/* Icon and Info for Stock Addition */}
+      {/* <BoxWrapper>
         <div className="rounded-full h-12 w-12 flex items-center justify-center bg-red-500">
           <IoCartOutline className="text-2xl text-white" />
         </div>
@@ -158,7 +157,7 @@ function DashboardStatsGrid() {
             </strong>
           </div>
         </div>
-      </BoxWrapper>
+      </BoxWrapper> */}
     </div>
   );
 }
