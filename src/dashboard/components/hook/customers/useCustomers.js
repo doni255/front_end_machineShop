@@ -226,7 +226,6 @@ const useCustomers = (users, setUsers) => {
         toast.success("User registered successfully!");
         // Close the modal after successful registration
         setIsCreateModalOpen(false);
-        window.location.reload();
       } else {
         throw new Error("Failed to register user.");
       }
