@@ -12,7 +12,6 @@ const useCustomers = (users, setUsers) => {
     id_user: "",
     nama: "",
     email: "",
-    role: "",
     alamat: "",
     kota: "",
     no_telpon: "",
@@ -28,7 +27,6 @@ const useCustomers = (users, setUsers) => {
     setEditUserData({
       nama: "",
       email: "",
-      role: "",
       alamat: "",
       kota: "",
       no_telpon: "",
@@ -42,7 +40,9 @@ const useCustomers = (users, setUsers) => {
   const handleDelete = async () => {
     if (selectedUser) {
       try {
-        await axios.delete(`https://backendtokomesin.grhapengharapan.org/api/users/${selectedUser}`);
+        await axios.delete(
+          `https://backendtokomesin.grhapengharapan.org/api/users/${selectedUser}`
+        );
         setUsers((prevUsers) =>
           prevUsers.filter((user) => user.id_user !== selectedUser)
         );
@@ -61,7 +61,6 @@ const useCustomers = (users, setUsers) => {
       id_user: user.id_user || "", // Pastikan id_user tidak null
       nama: user.nama || "", // Inisialisasi dengan string kosong jika null
       email: user.email || "", // Pastikan email tidak null
-      role: user.role || "", // Pastikan role tidak null
       alamat: user.alamat || "", // Pastikan alamat tidak null
       kota: user.kota || "", // Pastikan kota tidak null
       no_telpon: user.no_telpon || "", // Pastikan no_telpon tidak null
@@ -91,9 +90,9 @@ const useCustomers = (users, setUsers) => {
       const { nama, role, alamat, kota, no_telpon } = editUserData; // Extract the required fields
 
       // Validate required fields
-      if (!nama || !role || !alamat || !kota || !no_telpon) {
+      if (!nama || !alamat || !kota || !no_telpon) {
         toast.error(
-          "Please fill in all required fields: Nama, Role, Alamat, Kota, and No Telepon."
+          "Please fill in all required fields: Nama,  Alamat, Kota, and No Telepon."
         );
         return;
       }
@@ -132,6 +131,7 @@ const useCustomers = (users, setUsers) => {
 
   const namaRef = useRef();
   const emailRef = useRef();
+  const roleRef = useRef();
   const passwordRef = useRef();
   const no_telponRef = useRef();
   const kotaRef = useRef();
@@ -142,13 +142,12 @@ const useCustomers = (users, setUsers) => {
   const [formData, setFormData] = useState({
     nama: "",
     email: "",
+    role: "supplier",
     no_telpon: "",
     kota: "",
     alamat: "",
     password: "",
   });
-
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setFormData({
@@ -165,6 +164,7 @@ const useCustomers = (users, setUsers) => {
     const requiredFields = [
       { field: "nama", message: "Nama must be filled" },
       { field: "password", message: "Password must be filled" },
+      { field: "role", message: "Role must be filled" },
       { field: "no_telpon", message: "Nomor HP must be filled" },
       { field: "kota", message: "Kota must be filled" },
       { field: "alamat", message: "Alamat must be filled" },
@@ -193,9 +193,10 @@ const useCustomers = (users, setUsers) => {
       toast.error("Alamat must be at least 8 characters long");
       return;
     }
+
     try {
       const response = await fetch(
-        "https://backendtokomesin.grhapengharapan.org/api/store_user",
+        "https://backendtokomesin.grhapengharapan.org/api/store",
         {
           method: "POST",
           headers: {
@@ -214,24 +215,25 @@ const useCustomers = (users, setUsers) => {
         setFormData({
           nama: "",
           password: "",
+          role: "",
           no_telpon: "",
           kota: "",
           alamat: "",
         });
 
-        // Update the users state to include the new user
-        setUsers((prevUsers) => [...prevUsers, result]);
-
         // Show success message
         toast.success("User registered successfully!");
         // Close the modal after successful registration
+
+        // Update the users state to include the new user
+        setUsers((prevUsers) => [...prevUsers, result]);
         setIsCreateModalOpen(false);
       } else {
         throw new Error("Failed to register user.");
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
-      toast.error("An unexpected error occurred.");
+      toast.error("Username already exists");
     }
   };
 
@@ -244,6 +246,7 @@ const useCustomers = (users, setUsers) => {
     namaRef,
     emailRef,
     passwordRef,
+    roleRef,
     no_telponRef,
     kotaRef,
     alamatRef,
